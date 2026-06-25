@@ -4,6 +4,33 @@ A battle-tested collection of **Claude Code skills** (slash commands), **guardra
 
 These aren't theoretical — every skill, hook, and past-error rule was born from real incidents, real bugs, and real process failures encountered during active development with Claude Code.
 
+## Repository Structure
+
+```
+skills/
+├── custom/                    ← 23 original skills (spec→plan→implement→ship pipeline)
+├── third-party/
+│   ├── mattpocock/            ← 8 skills by Matt Pocock
+│   └── obra/                  ← 14 skills by Jesse Vincent (Superpowers)
+hooks/                         ← 47 guardrail hooks
+past-errors/                   ← 57 numbered rules from production incidents
+debugging/                     ← 4 domain-specific debugging playbooks
+```
+
+## Third-Party Credits
+
+This collection includes skills from two authors whose work integrates into the development workflow:
+
+### [Matt Pocock](https://github.com/mattpocock/skills) — 8 skills
+From the "Skills for Real Engineers" collection. General-purpose development skills for TDD, domain modeling, issue creation, and architecture analysis.
+
+Skills: `caveman`, `tdd`, `grill-with-docs`, `to-issues`, `to-prd`, `write-a-skill`, `git-guardrails`, `improve-codebase-architecture`
+
+### [Jesse Vincent / obra](https://github.com/obra/superpowers) — 14 skills
+The Superpowers agentic skills framework, distributed via [anthropics/claude-plugins-official](https://github.com/anthropics/claude-plugins-official). Provides brainstorming, parallel agent coordination, systematic debugging, and verification discipline.
+
+Skills: `brainstorming`, `dispatching-parallel-agents`, `executing-plans`, `finishing-a-development-branch`, `receiving-code-review`, `requesting-code-review`, `subagent-driven-development`, `systematic-debugging`, `test-driven-development`, `using-git-worktrees`, `using-superpowers`, `verification-before-completion`, `writing-plans`, `writing-skills`
+
 ---
 
 ## The Planning & Implementation System
@@ -597,10 +624,20 @@ Domain-specific playbooks:
 Copy any skill directory into `~/.claude/skills/` or your project's `.claude/skills/`:
 
 ```bash
-cp -r skills/diagnose ~/.claude/skills/
+# Custom skills
+cp -r skills/custom/diagnose ~/.claude/skills/
+
+# Third-party skills
+cp -r skills/third-party/mattpocock/tdd ~/.claude/skills/
 ```
 
-Then invoke with `/diagnose` in Claude Code.
+Then invoke with `/diagnose` or `/tdd` in Claude Code.
+
+### Install Superpowers (obra)
+The Superpowers skills are best installed as a plugin:
+```bash
+/install-plugin superpowers@claude-plugins-official
+```
 
 ### Install a Hook
 Copy hook files to `~/.claude/hooks/` and register them in your `~/.claude/settings.json`:
